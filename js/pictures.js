@@ -1,21 +1,10 @@
 import { createPhotosList } from './data.js';
+import { createPictureTemplate } from './templates.js';
 
 const picturesElement = document.querySelector('.pictures');
 
-const pictureTemplate = document.querySelector('#picture')
-  .content
-  .querySelector('.picture');
+const photos = createPhotosList()
+  .map((photo) => (createPictureTemplate(photo)))
+  .join('');
 
-const photosList = createPhotosList();
-
-const picturesFragment = document.createDocumentFragment();
-
-photosList.forEach(( {url, comments, likes} ) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  picturesFragment.appendChild(pictureElement);
-});
-
-picturesElement.appendChild(picturesFragment);
+picturesElement.insertAdjacentHTML('beforeEnd', photos);
