@@ -8,12 +8,13 @@ import {
 } from './util.js';
 
 
-const PHOTOS_COUNT = 25;
-const MIN_LIKES_COUNT = 15;
-const MAX_LIKES_COUNT = 200;
-const MAX_COMMENTS_COUNT = 10;
-const AVATAR_COUNT = 6;
-
+import {
+  PHOTOS_COUNT,
+  MIN_LIKES_COUNT,
+  MAX_LIKES_COUNT,
+  MAX_COMMENTS_COUNT,
+  AVATAR_COUNT
+} from './const.js';
 
 const NAMES = [
   'Луи Дагер',
