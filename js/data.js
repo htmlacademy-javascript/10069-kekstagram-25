@@ -83,10 +83,11 @@ const COMMENTS = [
 
 
 /**
-* Заполнение одного комментария-объекта данными. Используется глобальный счетчик ID, чтобы не было комментариев с одинаковым идентификатором.
-* @return {object} — комментарий-объект
-*/
-
+ * Заполнение одного комментария-объекта данными.
+ * Используется глобальный счетчик ID, чтобы не было комментариев с одинаковым идентификатором.
+ *
+ * @return {object} — комментарий-объект
+ */
 let commentID = 0;
 const createComment = () => (
   {
@@ -99,29 +100,29 @@ const createComment = () => (
 
 
 /**
-* Создание массива из комментариев-объектов.
-* @param {number} count — количество комментариев в массиве. По-умолчанию равно глобальной константе "MAX_COMMENTS_COUNT"
-* @return {array} — массив из комментариев-объектов
-*/
-
-const createCommentsList = (count = MAX_COMMENTS_COUNT) => (
+ * Создание массива из комментариев-объектов.
+ *
+ * @param {number} count — количество комментариев в массиве. По-умолчанию равно глобальной константе "MAX_COMMENTS_COUNT".
+ * @return {array} — массив из комментариев-объектов.
+ */
+const createCommentsArray = (count = MAX_COMMENTS_COUNT) => (
   Array.from({length: getRandomIntegerInRange(1, count)}, createComment)
 );
 
 
 /**
-* Заполнение одного элемента-объекта с данными для одной фотографии.
-* @param {number} id — идентификатор фотографии из общего массива фотографий
-* @return {object} — объект с данными для одной фотографии
-*/
-
+ * Заполнение одного элемента-объекта с данными для одной фотографии.
+ *
+ * @param {number} id — идентификатор фотографии из общего массива фотографий.
+ * @return {object} — объект с данными для одной фотографии.
+ */
 const createPhoto = (id) => (
   {
     id: id,
     url: `photos/${id}.jpg`,
     description: DESCRIPTIONS[id - 1],
     likes: getRandomIntegerInRange(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
-    comments: createCommentsList(),
+    comments: createCommentsArray(),
   }
 );
 
@@ -129,10 +130,10 @@ const createPhoto = (id) => (
 const photosRandomIdArray = shuffleArray(createArrayConsistentNumbers(1, PHOTOS_COUNT));
 
 /**
-* Создание массива из описаний фотографий.
-* @return {array} — массив из описаний фотографий
-*/
-
+ * Создание массива из описаний фотографий.
+ *
+ * @return {array} — массив из описаний фотографий.
+ */
 const createPhotosList = () => (
   photosRandomIdArray.map((id) => (
     createPhoto(id)
@@ -140,6 +141,7 @@ const createPhotosList = () => (
 );
 
 isStringNotOverLimit('test test test test', 10);
+
 
 export {
   createPhotosList
