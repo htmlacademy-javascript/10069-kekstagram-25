@@ -1,21 +1,25 @@
 import { createPhotosList } from './data.js';
+import { createPictureTemplate } from './templates.js';
+import { showPopup } from './popup.js';
 
 const picturesElement = document.querySelector('.pictures');
 
-const pictureTemplate = document.querySelector('#picture')
-  .content
-  .querySelector('.picture');
-
 const photosList = createPhotosList();
 
-const picturesFragment = document.createDocumentFragment();
+const photos = photosList.map((photo) => (createPictureTemplate(photo))).join('');
 
-photosList.forEach(( {url, comments, likes} ) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  picturesFragment.appendChild(pictureElement);
-});
+picturesElement.insertAdjacentHTML('beforeEnd', photos);
 
-picturesElement.appendChild(picturesFragment);
+/**
+ * Проверка, какому объекту в массиве с фотографиями соответствует миниатюра, на которую был произведен клик.
+ * Показ соответствующей фотографии в большом размере.
+ * При нахождении равенства идентификаторов использовано приведение к строке, чтобы:
+ *  1) иметь возможность использовать строгое равенство (этого требует линтер);
+ *  2) предусмотреть случаи, когда идентификатор может содержать не только цифры.
+ */
+const pictureClickHandler = (evt) => {
+  const photoData = photosList.find((photo) => (photo.id.toString() === evt.target.dataset.id));
+  showPopup(photoData);
+};
+
+picturesElement.addEventListener('click', pictureClickHandler);
