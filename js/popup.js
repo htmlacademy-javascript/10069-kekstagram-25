@@ -1,4 +1,8 @@
 import { createPopupCommentTemplate } from './templates.js';
+import {
+  isEscPress,
+  isMouseClick
+} from './util.js';
 
 
 const bodyElement = document.querySelector('body');
@@ -12,8 +16,6 @@ const commentsContainer = popupElement.querySelector('.social__comments');
 const commentCount = popupElement.querySelector('.social__comment-count');
 const commentsLoader = popupElement.querySelector('.comments-loader');
 
-const isEscPress = (evt) => (evt.key === ('Escape' || 'Esc'));
-const isMouseClick = (evt) => (evt.type === 'click');
 
 const hidePopupHandler = (evt) => {
   evt.preventDefault();

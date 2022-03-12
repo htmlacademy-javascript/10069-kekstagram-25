@@ -85,11 +85,25 @@ const getRandomCountArrayElements = (array, min = 1, max = array.length) => (
 );
 
 
+/**
+ * Проверка, что нажата клавиша "Escape".
+ */
+const isEscPress = (evt) => (evt.key === ('Escape' || 'Esc'));
+
+
+/**
+ * Проверка, что произведен клик левой клавишей мыши по объекту.
+ */
+const isMouseClick = (evt) => (evt.type === 'click');
+
+
 export {
   getRandomIntegerInRange,
   isStringNotOverLimit,
   createArrayConsistentNumbers,
   shuffleArray,
   getRandomArrayElement,
-  getRandomCountArrayElements
+  getRandomCountArrayElements,
+  isEscPress,
+  isMouseClick
 };
