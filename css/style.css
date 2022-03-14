@@ -663,7 +663,7 @@ main {
 .text {
   margin: 0;
   padding: 0;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 
   text-align: center;
   border: none;
@@ -688,6 +688,7 @@ main {
   height: 100px;
 
   margin: 0 auto;
+  margin-bottom: 15px;
   padding: 15px 10px;
 
   font-family: "Open Sans", "Arial", sans-serif;
@@ -695,6 +696,16 @@ main {
   color: #000000;
 
   border-radius: 5px;
+}
+
+.text__error {
+  display: block;
+  margin: -20px auto 0;
+  width: 450px;
+  text-transform: lowercase;
+  font-size: 0.85em;
+  background-color: #cc0000;
+  color: #ffffff;
 }
 
 
