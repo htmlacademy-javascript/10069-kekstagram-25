@@ -1,6 +1,6 @@
 import { createPhotosList } from './data.js';
 import { createPictureTemplate } from './templates.js';
-import { showPopup } from './popup.js';
+import { showPopup } from './modal-big-picture.js';
 
 const picturesElement = document.querySelector('.pictures');
 
