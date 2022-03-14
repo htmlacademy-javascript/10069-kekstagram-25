@@ -5,6 +5,7 @@ import {
 
 
 const bodyElement = document.querySelector('body');
+const imageUploadForm = document.querySelector('.img-upload__form');
 const imageUploadButton = document.querySelector('.img-upload__start input[type=file]');
 const imageUploadModal = document.querySelector('.img-upload__overlay');
 
@@ -17,10 +18,11 @@ const hideImageUploadModalHandler = (evt) => {
   if (isEscPress(evt) || isMouseClick(evt)) {
     imageUploadModal.classList.add('hidden');
     bodyElement.classList.remove('modal-open');
-    window.removeEventListener('keydown', hideImageUploadModalHandler);
+    /* window.removeEventListener('keydown', hideImageUploadModalHandler); */
     imgUploadCancel.removeEventListener('click', hideImageUploadModalHandler);
 
     imageUploadButton.value = '';
+    imageUploadForm.reset();
   }
 };
 
@@ -34,7 +36,7 @@ const showImageUploadModal = () => {
   bodyElement.classList.add('modal-open');
   imageUploadModal.classList.remove('hidden');
 
-  window.addEventListener('keydown', hideImageUploadModalHandler);
+  /* window.addEventListener('keydown', hideImageUploadModalHandler); */
   imgUploadCancel.addEventListener('click', hideImageUploadModalHandler);
 };
 

@@ -97,6 +97,16 @@ const isEscPress = (evt) => (evt.key === ('Escape' || 'Esc'));
 const isMouseClick = (evt) => (evt.type === 'click');
 
 
+/**
+ * Предотвращение "всплытия" события нажатия клавиши "Escape".
+ */
+const stopEscPropagation = (evt) => {
+  if (isEscPress(evt)) {
+    evt.stopPropagation();
+  }
+};
+
+
 export {
   getRandomIntegerInRange,
   isStringNotOverLimit,
@@ -105,5 +115,6 @@ export {
   getRandomArrayElement,
   getRandomCountArrayElements,
   isEscPress,
-  isMouseClick
+  isMouseClick,
+  stopEscPropagation
 };
