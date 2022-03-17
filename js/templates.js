@@ -4,7 +4,7 @@
  * @param {object} data — объект с данными фотографии пользователя.
  * @return {string} — шаблонная строка с HTML-шаблоном изображения.
  */
-const createPictureTemplate = ({url, description, id, comments, likes }) => (
+const createPictureTemplate = ( {url, description, id, comments, likes} ) => (
   `<a href="#" class="picture">
     <img class="picture__img" src="${url}" width="182" height="182" alt="${description}" data-id="${id}">
     <p class="picture__info">
