@@ -2,9 +2,9 @@ import {
   isEscPress,
   isMouseClick
 } from './util.js';
-
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const DEFAULT_PHOTO_URL = 'img/upload-default-image.jpg';
+import {
+  FILE_TYPES, DEFAULT_PHOTO_URL
+} from './const.js';
 
 const bodyElement = document.querySelector('body');
 const imageUploadForm = document.querySelector('.img-upload__form');
