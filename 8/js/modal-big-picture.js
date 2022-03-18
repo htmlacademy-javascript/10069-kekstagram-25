@@ -19,40 +19,6 @@ const showMoreCommentsButton = bigPictureModal.querySelector('.social__comments-
 
 let SHOWN_COMMENTS_COUNT = 0;
 
-const hidePopupHandler = (evt) => {
-  evt.preventDefault();
-  if (isEscPress(evt) || isMouseClick(evt)) {
-    bigPictureModal.classList.add('hidden');
-    bodyElement.classList.remove('modal-open');
-    document.removeEventListener('keydown', hidePopupHandler);
-    modalCloseButton.removeEventListener('click', hidePopupHandler);
-    SHOWN_COMMENTS_COUNT = 0;
-  }
-};
-
-const renderComments = (comments) => {
-  comments.slice(SHOWN_COMMENTS_COUNT, SHOWN_COMMENTS_COUNT + COMMENTS_PORTION)
-    .forEach((comment) => {
-      commentsContainer.insertAdjacentHTML('beforeEnd', createPopupCommentTemplate(comment));
-    });
-};
-
-const showMoreComments = (comments) => {
-  if (comments.length > COMMENTS_PORTION) {
-    SHOWN_COMMENTS_COUNT = COMMENTS_PORTION;
-    showMoreCommentsButton.classList.remove('hidden');
-    showMoreCommentsButton.addEventListener('click', () => {
-      renderComments(comments);
-      SHOWN_COMMENTS_COUNT += COMMENTS_PORTION;
-      if (SHOWN_COMMENTS_COUNT >= comments.length) {
-        SHOWN_COMMENTS_COUNT = comments.length;
-        showMoreCommentsButton.classList.add('hidden');
-      }
-      commentsShownCounter.textContent = SHOWN_COMMENTS_COUNT;
-    });
-  }
-};
-
 
 /**
  * Показ попапа с большой фотографией и списком комментариев.
@@ -61,7 +27,45 @@ const showMoreComments = (comments) => {
  * @param {object} data — объект с данными фотографии и комментариев.
  */
 const showPopup = ( {url, description, likes, comments} ) => {
+
   const commentsList = comments.slice();
+
+  const renderComments = () => {
+    commentsList.slice(SHOWN_COMMENTS_COUNT, SHOWN_COMMENTS_COUNT + COMMENTS_PORTION)
+      .forEach((comment) => {
+        commentsContainer.insertAdjacentHTML('beforeEnd', createPopupCommentTemplate(comment));
+      });
+  };
+
+  const showMoreCommentsHandler = () => {
+    renderComments();
+    SHOWN_COMMENTS_COUNT += COMMENTS_PORTION;
+    if (SHOWN_COMMENTS_COUNT >= commentsList.length) {
+      SHOWN_COMMENTS_COUNT = commentsList.length;
+      showMoreCommentsButton.classList.add('hidden');
+    }
+    commentsShownCounter.textContent = SHOWN_COMMENTS_COUNT;
+  };
+
+  const hidePopupHandler = (evt) => {
+    evt.preventDefault();
+    if (isEscPress(evt) || isMouseClick(evt)) {
+      bigPictureModal.classList.add('hidden');
+      bodyElement.classList.remove('modal-open');
+      document.removeEventListener('keydown', hidePopupHandler);
+      showMoreCommentsButton.removeEventListener('click', showMoreCommentsHandler);
+      modalCloseButton.removeEventListener('click', hidePopupHandler);
+      SHOWN_COMMENTS_COUNT = 0;
+    }
+  };
+
+  const showMoreComments = () => {
+    if (commentsList.length > COMMENTS_PORTION) {
+      SHOWN_COMMENTS_COUNT = COMMENTS_PORTION;
+      showMoreCommentsButton.classList.remove('hidden');
+      showMoreCommentsButton.addEventListener('click', showMoreCommentsHandler);
+    }
+  };
 
   bigPicture.src = url;
   bigPicture.alt = description;
@@ -74,8 +78,8 @@ const showPopup = ( {url, description, likes, comments} ) => {
   renderComments(commentsList);
   showMoreComments(commentsList);
 
-  commentsShownCounter.textContent = comments.length <= COMMENTS_PORTION ? comments.length : SHOWN_COMMENTS_COUNT;
-  commentsTotalCounter.textContent = comments.length;
+  commentsShownCounter.textContent = commentsList.length <= COMMENTS_PORTION ? commentsList.length : SHOWN_COMMENTS_COUNT;
+  commentsTotalCounter.textContent = commentsList.length;
 
   bodyElement.classList.add('modal-open');
   bigPictureModal.classList.remove('hidden');
