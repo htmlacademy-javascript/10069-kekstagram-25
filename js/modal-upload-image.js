@@ -3,7 +3,16 @@ import {
   isMouseClick
 } from './util.js';
 import {
-  FILE_TYPES, DEFAULT_PHOTO_URL
+  imageUploadScale,
+  imageScaleHandler
+} from './image-scale.js';
+import {
+  effectsList,
+  effectsListHandler
+} from './effects.js';
+import {
+  FILE_TYPES,
+  DEFAULT_PHOTO_URL
 } from './const.js';
 
 const bodyElement = document.querySelector('body');
@@ -12,7 +21,8 @@ const imageUploadButton = imageUploadForm.querySelector('.img-upload__start inpu
 const imageUploadModal = imageUploadForm.querySelector('.img-upload__overlay');
 const imageUploadPreview = imageUploadModal.querySelector('.img-upload__preview img');
 const imageUploadModalCloseButton = imageUploadModal.querySelector('.img-upload__cancel');
-
+const scaleControlValue = document.querySelector('.scale__control--value');
+const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 /**
  * Загрузка собственного изображения и подстановка в модальное окно.
@@ -35,17 +45,22 @@ const uploadPhoto = () => {
 
 imageUploadButton.addEventListener('change', uploadPhoto);
 
+
 /**
  * Закрытие модального окна и очищение полей формы до состояния по-умолчанию.
  */
-const hideImageUploadModalHandler = (evt) => {
+const closeImageUploadModalHandler = (evt) => {
   if (isEscPress(evt) || isMouseClick(evt)) {
     imageUploadModal.classList.add('hidden');
     bodyElement.classList.remove('modal-open');
-    document.removeEventListener('keydown', hideImageUploadModalHandler);
-    imageUploadModalCloseButton.removeEventListener('click', hideImageUploadModalHandler);
+    document.removeEventListener('keydown', closeImageUploadModalHandler);
+    imageUploadModalCloseButton.removeEventListener('click', closeImageUploadModalHandler);
+    imageUploadScale.removeEventListener('click', imageScaleHandler);
+    effectsList.removeEventListener('change', effectsListHandler);
     imageUploadForm.reset();
     imageUploadButton.value = '';
+    imageUploadPreview.style = '';
+    imageUploadPreview.classList = '';
   }
 };
 
@@ -57,8 +72,14 @@ const showImageUploadModalHandler = () => {
   bodyElement.classList.add('modal-open');
   imageUploadModal.classList.remove('hidden');
 
-  document.addEventListener('keydown', hideImageUploadModalHandler);
-  imageUploadModalCloseButton.addEventListener('click', hideImageUploadModalHandler);
+  document.addEventListener('keydown', closeImageUploadModalHandler);
+  imageUploadModalCloseButton.addEventListener('click', closeImageUploadModalHandler);
+  imageUploadScale.addEventListener('click', imageScaleHandler);
+  effectsList.addEventListener('change', effectsListHandler);
+  scaleControlValue.value = '100%';
+  scaleControlValue.setAttribute('value', '100%');
+  imageUploadPreview.style.transform = 'scale(1)';
+  effectLevelSlider.classList.add('hidden');
 };
 
 imageUploadButton.addEventListener('change', showImageUploadModalHandler);
