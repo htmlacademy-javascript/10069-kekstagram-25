@@ -1,6 +1,7 @@
 import { createPhotosList } from './data.js';
 import { createPictureTemplate } from './templates.js';
-import { showPopup } from './modal-big-picture.js';
+import { showBigPictureModal } from './modal-big-picture.js';
+
 
 const picturesElement = document.querySelector('.pictures');
 
@@ -20,8 +21,8 @@ picturesElement.insertAdjacentHTML('beforeEnd', photos);
  */
 const pictureClickHandler = (evt) => {
   if (evt.target.classList.contains('picture__img')) {
-    const photoData = photosList.find((photo) => (photo.id.toString() === evt.target.dataset.id));
-    showPopup(photoData);
+    const photoCard = photosList.find((photo) => (photo.id.toString() === evt.target.dataset.id));
+    showBigPictureModal(photoCard);
   }
 };
 

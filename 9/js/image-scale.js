@@ -10,7 +10,7 @@ const imageUploadScale = document.querySelector('.img-upload__scale');
 
 let scaleValue = 100;
 
-const imageScaleHandler = (evt) => {
+const imageScaleClickHandler = (evt) => {
   if (evt.target.classList.contains('scale__control--smaller')) {
     scaleValue -= SCALE_STEP;
   }
@@ -35,5 +35,5 @@ const imageScaleHandler = (evt) => {
 
 export {
   imageUploadScale,
-  imageScaleHandler
+  imageScaleClickHandler
 };

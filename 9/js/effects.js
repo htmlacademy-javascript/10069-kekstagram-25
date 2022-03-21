@@ -7,7 +7,7 @@ const effect = {
   'effect-none': {
     filter: 'none',
     unit: '',
-    css: '',
+    class: '',
     noUiSlider: {
       range: {
         min: 0,
@@ -19,7 +19,7 @@ const effect = {
   'effect-chrome': {
     filter: 'grayscale',
     unit: '',
-    css: 'chrome',
+    class: 'chrome',
     noUiSlider: {
       range: {
         min: 0,
@@ -31,7 +31,7 @@ const effect = {
   'effect-sepia': {
     filter: 'sepia',
     unit: '',
-    css: 'sepia',
+    class: 'sepia',
     noUiSlider: {
       range: {
         min: 0,
@@ -43,7 +43,7 @@ const effect = {
   'effect-marvin': {
     filter: 'invert',
     unit: '%',
-    css: 'marvin',
+    class: 'marvin',
     noUiSlider: {
       range: {
         min: 0,
@@ -55,7 +55,7 @@ const effect = {
   'effect-phobos': {
     filter: 'blur',
     unit: 'px',
-    css: 'phobos',
+    class: 'phobos',
     noUiSlider: {
       range: {
         min: 0,
@@ -67,7 +67,7 @@ const effect = {
   'effect-heat': {
     filter: 'brightness',
     unit: '',
-    css: 'heat',
+    class: 'heat',
     noUiSlider: {
       range: {
         min: 1,
@@ -99,7 +99,7 @@ noUiSlider.create(effectLevelSlider, {
   }
 });
 
-const effectsListHandler = (evt) => {
+const effectsListChangeHandler = (evt) => {
   imageUploadPreview.classList = '';
   if (evt.target.id === 'effect-none') {
     effectLevelSlider.classList.add('hidden');
@@ -107,7 +107,7 @@ const effectsListHandler = (evt) => {
   } else {
     effectLevelSlider.classList.remove('hidden');
     effectLevelSlider.noUiSlider.updateOptions(effect[evt.target.id].noUiSlider);
-    imageUploadPreview.classList.add(`effects__preview--${effect[evt.target.id].css}`);
+    imageUploadPreview.classList.add(`effects__preview--${effect[evt.target.id].class}`);
   }
 };
 
@@ -121,5 +121,5 @@ effectLevelSlider.noUiSlider.on('update', () => {
 
 export {
   effectsList,
-  effectsListHandler
+  effectsListChangeHandler
 };

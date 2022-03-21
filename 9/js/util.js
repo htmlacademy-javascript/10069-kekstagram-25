@@ -15,19 +15,6 @@ const getRandomIntegerInRange = (min, max) => {
 
 
 /**
- * Проверка длины строки на превышение лимита количества символов.
- * Пробелы в по обоим концам строки не учитываются в подсчете.
- *
- * @param {string} string — проверяемая строка.
- * @param {number} limit — лимит символов.
- * @return {boolean} — результат проверки превышения лимита (true - лимит не превышен/ false - лимит превышен).
- */
-const isStringNotOverLimit = (string, limit = 140) => (
-  string.trim().length <= limit
-);
-
-
-/**
  * Создание массива из последовательных чисел в заданном диапазоне.
  *
  * @param {number} start — стартовое число диапазона.
@@ -86,7 +73,7 @@ const getRandomCountArrayElements = (array, min = 1, max = array.length) => (
 
 
 /**
- * Проверка, что нажата клавиша "Escape".
+ * Проверка, что нажата клавиша ESC.
  */
 const isEscPress = (evt) => (evt.key === ('Escape' || 'Esc'));
 
@@ -98,7 +85,7 @@ const isMouseClick = (evt) => (evt.type === 'click');
 
 
 /**
- * Предотвращение "всплытия" события нажатия клавиши "Escape".
+ * Предотвращение "всплытия" события "нажата клавиша ESC".
  */
 const stopEscPropagation = (evt) => {
   if (isEscPress(evt)) {
@@ -109,7 +96,6 @@ const stopEscPropagation = (evt) => {
 
 export {
   getRandomIntegerInRange,
-  isStringNotOverLimit,
   createArrayConsistentNumbers,
   shuffleArray,
   getRandomArrayElement,
