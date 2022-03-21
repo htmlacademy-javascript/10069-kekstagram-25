@@ -1,12 +1,10 @@
 import {
   getRandomIntegerInRange,
-  isStringNotOverLimit,
   createArrayConsistentNumbers,
   shuffleArray,
   getRandomArrayElement,
   getRandomCountArrayElements
 } from './util.js';
-
 
 import {
   PHOTOS_COUNT,
@@ -102,7 +100,7 @@ const createComment = () => (
 /**
  * Создание массива из комментариев-объектов.
  *
- * @param {number} count — количество комментариев в массиве. По-умолчанию равно глобальной константе "MAX_COMMENTS_COUNT".
+ * @param {number} count — количество комментариев в массиве, по-умолчанию равно глобальной константе "MAX_COMMENTS_COUNT".
  * @return {array} — массив из комментариев-объектов.
  */
 const createCommentsArray = (count = MAX_COMMENTS_COUNT) => (
@@ -127,20 +125,16 @@ const createPhoto = (id) => (
 );
 
 
-const photosRandomIdArray = shuffleArray(createArrayConsistentNumbers(1, PHOTOS_COUNT));
-
 /**
  * Создание массива из описаний фотографий.
  *
  * @return {array} — массив из описаний фотографий.
  */
 const createPhotosList = () => (
-  photosRandomIdArray.map((id) => (
+  shuffleArray(createArrayConsistentNumbers(1, PHOTOS_COUNT)).map((id) => (
     createPhoto(id)
   ))
 );
-
-isStringNotOverLimit('test test test test', 10);
 
 
 export {
