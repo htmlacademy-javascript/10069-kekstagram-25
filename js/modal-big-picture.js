@@ -8,7 +8,7 @@ import {
 
 const bodyElement = document.querySelector('body');
 const bigPictureModal = document.querySelector('.big-picture');
-const modalCloseButton = bigPictureModal.querySelector('.big-picture__cancel');
+const bigPictureModalCloseButton = bigPictureModal.querySelector('.big-picture__cancel');
 const bigPicture = bigPictureModal.querySelector('.big-picture__img img');
 const photoDescription = bigPictureModal.querySelector('.social__caption');
 const likesCounter = bigPictureModal.querySelector('.likes-count');
@@ -26,7 +26,7 @@ let SHOWN_COMMENTS_COUNT = 0;
  *
  * @param {object} data — объект с данными фотографии и комментариев.
  */
-const showPopup = ( {url, description, likes, comments} ) => {
+const showBigPictureModal = ( {url, description, likes, comments} ) => {
 
   const commentsList = comments.slice();
 
@@ -37,7 +37,7 @@ const showPopup = ( {url, description, likes, comments} ) => {
       });
   };
 
-  const showMoreCommentsHandler = () => {
+  const showMoreCommentsButtonClickHandler = () => {
     renderComments();
     SHOWN_COMMENTS_COUNT += COMMENTS_PORTION;
     if (SHOWN_COMMENTS_COUNT >= commentsList.length) {
@@ -47,14 +47,14 @@ const showPopup = ( {url, description, likes, comments} ) => {
     commentsShownCounter.textContent = SHOWN_COMMENTS_COUNT;
   };
 
-  const hidePopupHandler = (evt) => {
+  const hideBigPictureModal = (evt) => {
     evt.preventDefault();
     if (isEscPress(evt) || isMouseClick(evt)) {
       bigPictureModal.classList.add('hidden');
       bodyElement.classList.remove('modal-open');
-      document.removeEventListener('keydown', hidePopupHandler);
-      showMoreCommentsButton.removeEventListener('click', showMoreCommentsHandler);
-      modalCloseButton.removeEventListener('click', hidePopupHandler);
+      document.removeEventListener('keydown', hideBigPictureModal);
+      showMoreCommentsButton.removeEventListener('click', showMoreCommentsButtonClickHandler);
+      bigPictureModalCloseButton.removeEventListener('click', hideBigPictureModal);
       SHOWN_COMMENTS_COUNT = 0;
     }
   };
@@ -63,7 +63,7 @@ const showPopup = ( {url, description, likes, comments} ) => {
     if (commentsList.length > COMMENTS_PORTION) {
       SHOWN_COMMENTS_COUNT = COMMENTS_PORTION;
       showMoreCommentsButton.classList.remove('hidden');
-      showMoreCommentsButton.addEventListener('click', showMoreCommentsHandler);
+      showMoreCommentsButton.addEventListener('click', showMoreCommentsButtonClickHandler);
     }
   };
 
@@ -84,11 +84,11 @@ const showPopup = ( {url, description, likes, comments} ) => {
   bodyElement.classList.add('modal-open');
   bigPictureModal.classList.remove('hidden');
 
-  document.addEventListener('keydown', hidePopupHandler);
-  modalCloseButton.addEventListener('click', hidePopupHandler);
+  document.addEventListener('keydown', hideBigPictureModal);
+  bigPictureModalCloseButton.addEventListener('click', hideBigPictureModal);
 };
 
 
 export {
-  showPopup
+  showBigPictureModal
 };
