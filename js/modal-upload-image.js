@@ -35,7 +35,7 @@ const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 /**
  * Загрузка собственного изображения и подстановка в модальное окно.
- * При выборе файла с неподходящим разрешением показывается фото-заглушка.
+ * При выборе файла с неподходящим расширением показывается фото-заглушка.
  */
 const uploadPhoto = () => {
   const file = imageUploadButton.files[0];

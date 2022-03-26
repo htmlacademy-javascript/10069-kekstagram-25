@@ -1,15 +1,20 @@
-import { createPhotosList } from './data.js';
 import { createPictureTemplate } from './templates.js';
 import { showBigPictureModal } from './modal-big-picture.js';
 
 
 const picturesElement = document.querySelector('.pictures');
 
-const photosList = createPhotosList();
 
-const photos = photosList.map((photo) => (createPictureTemplate(photo))).join('');
+/**
+ * Рендер (показ) превьюшек фотографий на странице на основании массива с данными для фотографий.
+ *
+ * @param {array} photosArray — массив с данными по каждой фотографии.
+ */
+const renderPhotosList = (photosArray) => {
+  const photos = photosArray.map((photo) => (createPictureTemplate(photo))).join('');
+  picturesElement.insertAdjacentHTML('beforeEnd', photos);
+};
 
-picturesElement.insertAdjacentHTML('beforeEnd', photos);
 
 /**
  * Проверка, какому объекту в массиве с фотографиями соответствует миниатюра, на которую был произведен клик.
@@ -19,11 +24,17 @@ picturesElement.insertAdjacentHTML('beforeEnd', photos);
  *  1) иметь возможность использовать строгое равенство (этого требует линтер);
  *  2) предусмотреть случаи, когда идентификатор может содержать не только цифры.
  */
-const pictureClickHandler = (evt) => {
-  if (evt.target.classList.contains('picture__img')) {
-    const photoCard = photosList.find((photo) => (photo.id.toString() === evt.target.dataset.id));
-    showBigPictureModal(photoCard);
-  }
+const getSelectedImageCard = (photosArray) => {
+  picturesElement.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('picture__img')) {
+      const photoCard = photosArray.find((photo) => (photo.id.toString() === evt.target.dataset.id));
+      showBigPictureModal(photoCard);
+    }
+  });
 };
 
-picturesElement.addEventListener('click', pictureClickHandler);
+
+export {
+  renderPhotosList,
+  getSelectedImageCard
+};
