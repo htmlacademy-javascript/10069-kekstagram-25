@@ -88,10 +88,9 @@ const pristine = new Pristine(imageUploadForm, {
   errorTextClass: 'text__error'
 });
 
-const activatePristine = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-};
+const validatePristine = () => (
+  pristine.validate()
+);
 
 const destroyPristine = () => {
   pristine.destroy();
@@ -108,6 +107,6 @@ pristine.addValidator(commentElement, validateCommentLength, `Максималь
 
 
 export {
-  activatePristine,
+  validatePristine,
   destroyPristine
 };
