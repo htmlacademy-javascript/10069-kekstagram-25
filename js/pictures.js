@@ -23,6 +23,7 @@ const renderPhotosList = (photosArray) => {
  * При нахождении равенства идентификаторов использовано приведение к строке, чтобы:
  *  1) иметь возможность использовать строгое равенство (этого требует линтер);
  *  2) предусмотреть случаи, когда идентификатор может содержать не только цифры.
+ * @param {array} photosArray — массив с данными по каждой фотографии.
  */
 const getSelectedImageCard = (photosArray) => {
   picturesElement.addEventListener('click', (evt) => {

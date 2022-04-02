@@ -92,11 +92,6 @@ const validatePristine = () => (
   pristine.validate()
 );
 
-const destroyPristine = () => {
-  pristine.destroy();
-};
-
-
 pristine.addValidator(hashtagsElement, validateStartHash, 'Хэштег должен начинаться с символа решётки (#)');
 pristine.addValidator(hashtagsElement, validateTagOnlyHash, 'Хэштег не должен состоять только из символа решётки (#)');
 pristine.addValidator(hashtagsElement, validateTagsCount, `Не больше ${HASHTAGS_MAX_COUNT} хэштегов`);
@@ -107,6 +102,5 @@ pristine.addValidator(commentElement, validateCommentLength, `Максималь
 
 
 export {
-  validatePristine,
-  destroyPristine
+  validatePristine
 };
