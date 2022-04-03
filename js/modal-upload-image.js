@@ -2,29 +2,23 @@ import {
   isEscPress,
   isMouseClick
 } from './util.js';
-
 import {
   FILE_TYPES,
   DEFAULT_PHOTO_URL
 } from './const.js';
-
 import { sendData } from './fetch.js';
-
 import {
   showSuccessModal,
   showErrorModal
 } from './modal-messages.js';
-
 import {
   imageUploadScale,
   imageScaleClickHandler
 } from './image-scale.js';
-
 import {
   effectsList,
   effectsListChangeHandler
 } from './effects.js';
-
 import { validatePristine } from './validate.js';
 
 
@@ -40,7 +34,7 @@ const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 
 /**
- * Блокировка кнопки Sumbit на время отправки данных на сервер.
+ * Блокировка кнопки Submit на время отправки данных на сервер.
  * Отображение надписи для уведомления пользователя о прочессе отправки.
  */
 const blockSubmitButton = () => {
@@ -50,7 +44,7 @@ const blockSubmitButton = () => {
 
 
 /**
- * Разблокировка кнопки Sumbit на время отправки данных на сервер.
+ * Разблокировка кнопки Submit на время отправки данных на сервер.
  * Как при удачной отправке данных, так и при неудачной.
  */
 const unblockSubmitButton = () => {
@@ -66,15 +60,11 @@ const unblockSubmitButton = () => {
 const uploadPhoto = () => {
   const file = imageUploadButton.files[0];
   const fileName = file.name.toLowerCase();
+
   const matches = FILE_TYPES.some((it) => (fileName.endsWith(it)));
+
   if (matches) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.addEventListener('load', () => {
-      imageUploadPreview.src = reader.result;
-    });
-    scaleControlValue.value = '100%';
-    scaleControlValue.setAttribute('value', '100%');
+    imageUploadPreview.src = URL.createObjectURL(file);
   } else {
     imageUploadPreview.src = DEFAULT_PHOTO_URL;
   }
@@ -132,7 +122,6 @@ const closeUploadImageModal = (evt) => {
     imageUploadForm.removeEventListener('submit', setFormSubmitHandler);
     imageUploadScale.removeEventListener('click', imageScaleClickHandler);
     effectsList.removeEventListener('change', effectsListChangeHandler);
-    imageUploadButton.removeEventListener('change', uploadPhoto);
     setUploadImageModalDefault();
   }
 };
@@ -152,7 +141,6 @@ const showUploadImageModal = () => {
   effectsList.addEventListener('change', effectsListChangeHandler);
   effectLevelSlider.classList.add('hidden');
 };
-
 
 imageUploadButton.addEventListener('change', uploadPhoto);
 imageUploadButton.addEventListener('change', showUploadImageModal);

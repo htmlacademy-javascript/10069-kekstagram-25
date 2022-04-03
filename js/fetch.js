@@ -1,5 +1,8 @@
-const GET_URL = 'https://25.javascript.pages.academy/kekstagram/data';
-const SEND_URL = 'https://25.javascript.pages.academy/kekstagram';
+import {
+  GET_URL,
+  SEND_URL
+} from './const.js';
+
 
 /**
  * Получает данные с сервера, проверяет на корректность и отправляет дальше по цепочке промисов

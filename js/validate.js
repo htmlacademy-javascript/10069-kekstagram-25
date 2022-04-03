@@ -54,7 +54,7 @@ const validateTagsCount = (value) => (
  */
 const validateTagsDuplicate = (value) => {
   const hashtags = splitHashtags(value);
-  return !(hashtags.some((tag, index) => hashtags.indexOf(tag) !== index));
+  return !(hashtags.some((tag, index) => (hashtags.indexOf(tag) !== index)));
 };
 
 /**

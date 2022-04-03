@@ -2,8 +2,7 @@ import {
   isEscPress,
   isMouseClick
 } from './util.js';
-
-const MESSAGE_TIMEOUT = 5000;
+import { MESSAGE_TIMEOUT } from './const.js';
 
 const pageBody = document.querySelector('body');
 const successModal = document.querySelector('#success').content.querySelector('.success').cloneNode(true);

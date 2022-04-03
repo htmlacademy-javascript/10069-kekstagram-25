@@ -1,3 +1,6 @@
+import { DEBOUNCE_DELAY } from './const.js';
+
+
 /**
  * Перемешивание элементов массива в случайном порядке.
  *
@@ -22,8 +25,7 @@ const shuffleArray = (array) => {
  * @param {callback} callback — функция, выполнение которой нужно задержать на заданное время.
  * @param {number} timeoutDelay — время в миллисекундах. Пауза перед выполнением переданной функции.
  */
-const DELAY = 300;
-const debounce = (callback, timeoutDelay = DELAY) => {
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
