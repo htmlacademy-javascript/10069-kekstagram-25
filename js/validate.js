@@ -8,11 +8,11 @@ import {
 } from './const.js';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
-const hashtagsElement = imageUploadForm.querySelector('.text__hashtags');
-const commentElement = imageUploadForm.querySelector('.text__description');
+const hashtagsField = imageUploadForm.querySelector('.text__hashtags');
+const commentField = imageUploadForm.querySelector('.text__description');
 
-hashtagsElement.addEventListener('keydown', stopEscPropagation);
-commentElement.addEventListener('keydown', stopEscPropagation);
+hashtagsField.addEventListener('keydown', stopEscPropagation);
+commentField.addEventListener('keydown', stopEscPropagation);
 
 
 /**
@@ -92,13 +92,13 @@ const validatePristine = () => (
   pristine.validate()
 );
 
-pristine.addValidator(hashtagsElement, validateStartHash, 'Хэштег должен начинаться с символа решётки (#)');
-pristine.addValidator(hashtagsElement, validateTagOnlyHash, 'Хэштег не должен состоять только из символа решётки (#)');
-pristine.addValidator(hashtagsElement, validateTagsCount, `Не больше ${HASHTAGS_MAX_COUNT} хэштегов`);
-pristine.addValidator(hashtagsElement, validateTagsDuplicate, 'Хэштеги не должны повторяться');
-pristine.addValidator(hashtagsElement, validateTagLength, `Длина хэштега - от ${HASHTAGS_MIN_SYMBOLS} до ${HASHTAGS_MAX_SYMBOLS} символов, включая решётку`);
-pristine.addValidator(hashtagsElement, validateTagRegEx, 'Хештег должен состоять только из букв и цифр');
-pristine.addValidator(commentElement, validateCommentLength, `Максимальная длина комментария - ${COMMENT_MAX_LENGTH} символов`);
+pristine.addValidator(hashtagsField, validateStartHash, 'Хэштег должен начинаться с символа решётки (#)');
+pristine.addValidator(hashtagsField, validateTagOnlyHash, 'Хэштег не должен состоять только из символа решётки (#)');
+pristine.addValidator(hashtagsField, validateTagsCount, `Не больше ${HASHTAGS_MAX_COUNT} хэштегов`);
+pristine.addValidator(hashtagsField, validateTagsDuplicate, 'Хэштеги не должны повторяться');
+pristine.addValidator(hashtagsField, validateTagLength, `Длина хэштега - от ${HASHTAGS_MIN_SYMBOLS} до ${HASHTAGS_MAX_SYMBOLS} символов, включая решётку`);
+pristine.addValidator(hashtagsField, validateTagRegEx, 'Хештег должен состоять только из букв и цифр');
+pristine.addValidator(commentField, validateCommentLength, `Максимальная длина комментария - ${COMMENT_MAX_LENGTH} символов`);
 
 
 export {

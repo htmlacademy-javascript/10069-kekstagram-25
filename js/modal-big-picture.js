@@ -6,7 +6,7 @@ import {
 } from './util.js';
 
 
-const bodyElement = document.querySelector('body');
+const pageBody = document.querySelector('body');
 const bigPictureModal = document.querySelector('.big-picture');
 const bigPictureModalCloseButton = bigPictureModal.querySelector('.big-picture__cancel');
 const bigPicture = bigPictureModal.querySelector('.big-picture__img img');
@@ -51,7 +51,7 @@ const showBigPictureModal = ( {url, description, likes, comments} ) => {
     evt.preventDefault();
     if (isEscPress(evt) || isMouseClick(evt)) {
       bigPictureModal.classList.add('hidden');
-      bodyElement.classList.remove('modal-open');
+      pageBody.classList.remove('modal-open');
       document.removeEventListener('keydown', hideBigPictureModal);
       showMoreCommentsButton.removeEventListener('click', showMoreCommentsButtonClickHandler);
       bigPictureModalCloseButton.removeEventListener('click', hideBigPictureModal);
@@ -81,7 +81,7 @@ const showBigPictureModal = ( {url, description, likes, comments} ) => {
   commentsShownCounter.textContent = commentsList.length <= COMMENTS_PORTION ? commentsList.length : SHOWN_COMMENTS_COUNT;
   commentsTotalCounter.textContent = commentsList.length;
 
-  bodyElement.classList.add('modal-open');
+  pageBody.classList.add('modal-open');
   bigPictureModal.classList.remove('hidden');
 
   document.addEventListener('keydown', hideBigPictureModal);

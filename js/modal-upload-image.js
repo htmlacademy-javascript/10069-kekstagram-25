@@ -22,7 +22,7 @@ import {
 import { validatePristine } from './validate.js';
 
 
-const bodyElement = document.querySelector('body');
+const pageBody = document.querySelector('body');
 const imageUploadForm = document.querySelector('.img-upload__form');
 const imageUploadSubmitButton = document.querySelector('.img-upload__submit');
 const imageUploadButton = imageUploadForm.querySelector('.img-upload__start input[type=file]');
@@ -76,7 +76,7 @@ const uploadPhoto = () => {
  */
 const setUploadImageModalDefault = () => {
   imageUploadModal.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
+  pageBody.classList.remove('modal-open');
   unblockSubmitButton();
   imageUploadForm.reset();
   imageUploadButton.value = '';
@@ -132,7 +132,7 @@ const closeUploadImageModal = (evt) => {
  * Скрытие модалки происходит при клипе на кнопку закрытия и нажатие клавиши ESC.
  */
 const showUploadImageModal = () => {
-  bodyElement.classList.add('modal-open');
+  pageBody.classList.add('modal-open');
   imageUploadModal.classList.remove('hidden');
   document.addEventListener('keydown', closeUploadImageModal);
   imageUploadModalCloseButton.addEventListener('click', closeUploadImageModal);
