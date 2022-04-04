@@ -2,7 +2,7 @@ import { createPictureTemplate } from './templates.js';
 import { showBigPictureModal } from './modal-big-picture.js';
 
 
-const picturesElement = document.querySelector('.pictures');
+const picturesContainer = document.querySelector('.pictures');
 
 
 /**
@@ -12,7 +12,7 @@ const picturesElement = document.querySelector('.pictures');
  */
 const renderPhotosList = (photosArray) => {
   const photos = photosArray.map((photo) => (createPictureTemplate(photo))).join('');
-  picturesElement.insertAdjacentHTML('beforeEnd', photos);
+  picturesContainer.insertAdjacentHTML('beforeEnd', photos);
 };
 
 
@@ -26,7 +26,7 @@ const renderPhotosList = (photosArray) => {
  * @param {array} photosArray — массив с данными по каждой фотографии.
  */
 const getSelectedImageCard = (photosArray) => {
-  picturesElement.addEventListener('click', (evt) => {
+  picturesContainer.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('picture__img')) {
       const photoCard = photosArray.find((photo) => (photo.id.toString() === evt.target.dataset.id));
       showBigPictureModal(photoCard);
